@@ -1,0 +1,363 @@
+---
+# Source: hazelcast/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test-custom-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+---
+# Source: hazelcast/templates/config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-custom-hazelcast-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast.yaml: |-
+    hazelcast:
+      jet:
+        enabled: ${hz.jet.enabled}
+      network:
+        join:
+          kubernetes:
+            enabled: true
+            namespace: ${namespace}
+            service-name: ${serviceName}
+        rest-api:
+          enabled: true
+---
+# Source: hazelcast/templates/mancenter-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-custom-hazelcast-mancenter-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast-client.yaml: |-
+    hazelcast-client:
+      network:
+        kubernetes:
+          enabled: true
+          namespace: ${namespace}
+          service-name: ${serviceName}
+---
+# Source: hazelcast/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: test-custom-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - pods
+  - nodes
+  - services
+  verbs:
+  - get
+  - list
+---
+# Source: hazelcast/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: test-custom-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: test-custom-hazelcast-default
+subjects:
+- kind: ServiceAccount
+  name: test-custom-hazelcast
+  namespace: default
+---
+# Source: hazelcast/templates/mancenter-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-custom-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: hazelcast-mancenter
+    app.kubernetes.io/instance: "test-custom"
+    role: mancenter
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: mancenter
+    name: http
+  - protocol: TCP
+    port: 443
+    targetPort: mancenter
+    name: https
+---
+# Source: hazelcast/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-custom-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "test-custom"
+    role: hazelcast
+  ports:
+  - protocol: TCP
+    port: 5701
+    targetPort: hazelcast
+    name: hzport
+---
+# Source: hazelcast/templates/mancenter-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-custom-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  serviceName: test-custom-hazelcast-mancenter
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast-mancenter
+      app.kubernetes.io/instance: "test-custom"
+      role: mancenter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast-mancenter
+        helm.sh/chart: hazelcast-5.4.2
+        app.kubernetes.io/instance: "test-custom"
+        app.kubernetes.io/managed-by: "Helm"
+        role: mancenter
+    spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: test-custom-hazelcast-mancenter
+        image: "hazelcast/management-center:5.1.3"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: mancenter
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: mancenter-storage
+          mountPath: /data
+        - name: mancenter-custom
+          mountPath: /data/custom
+        env:
+        - name: MC_CLASSPATH
+          value: "/data/custom:/data/custom/*"
+        
+        
+        
+        
+        
+        - name: MC_INIT_CMD
+          value: "./bin/mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml; "
+        - name: JAVA_OPTS
+          value: " -Dhazelcast.mc.healthCheck.enable=true -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        fsGroup: 65534
+      serviceAccountName: test-custom-hazelcast
+      automountServiceAccountToken: true
+      volumes:
+      - name: config
+        configMap:
+           name: test-custom-hazelcast-mancenter-configuration
+      - name: mancenter-storage
+      - name: mancenter-custom
+        persistentVolumeClaim:
+          claimName: mc-custom-local-pv-claim
+    
+  volumeClaimTemplates:
+  - metadata:
+      name: mancenter-storage
+      labels:
+        app.kubernetes.io/name: hazelcast-mancenter
+        helm.sh/chart: "hazelcast-5.4.2"
+        app.kubernetes.io/instance: "test-custom"
+        app.kubernetes.io/managed-by: "Helm"
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "8Gi"
+---
+# Source: hazelcast/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-custom-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.2
+    app.kubernetes.io/instance: "test-custom"
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+spec:
+  serviceName: test-custom-hazelcast
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast
+      app.kubernetes.io/instance: "test-custom"
+      role: hazelcast
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast
+        helm.sh/chart: hazelcast-5.4.2
+        app.kubernetes.io/instance: "test-custom"
+        app.kubernetes.io/managed-by: "Helm"
+        role: hazelcast
+      annotations:
+        checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+    spec:
+      terminationGracePeriodSeconds: 600
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: test-custom-hazelcast
+        image: "hazelcast/hazelcast:5.1.2"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: hazelcast
+          containerPort: 5701
+          hostPort: 5701
+        livenessProbe:
+          httpGet:
+            path: /hazelcast/health/node-state
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /hazelcast/health/node-state
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        volumeMounts:
+        - name: hazelcast-storage
+          mountPath: /data/hazelcast
+        - name: hazelcast-custom
+          mountPath: /data/custom
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: CLASSPATH
+          value: "/data/custom:/data/custom/*"
+        - name: JAVA_OPTS
+          value: "-Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      serviceAccountName: test-custom-hazelcast
+      automountServiceAccountToken: true
+      volumes:
+      - name: hazelcast-storage
+        configMap:
+          name: test-custom-hazelcast-configuration
+      - name: hazelcast-custom
+        persistentVolumeClaim:
+          claimName: hz-custom-local-pv-claim

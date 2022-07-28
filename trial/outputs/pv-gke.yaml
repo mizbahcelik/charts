@@ -1,0 +1,109 @@
+Name:              hz-custom-local-pv-0
+Labels:            <none>
+Annotations:       pv.kubernetes.io/bound-by-controller: yes
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Bound
+Claim:             default/hz-custom-local-pv-claim
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-4glt, gke-mizbah-test-default-pool-7dbea308-dz71, gke-mizbah-test-default-pool-7dbea308-tk26]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>
+
+
+Name:              hz-custom-local-pv-1
+Labels:            <none>
+Annotations:       pv.kubernetes.io/bound-by-controller: yes
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Bound
+Claim:             default/mc-custom-local-pv-claim
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-4glt, gke-mizbah-test-default-pool-7dbea308-dz71, gke-mizbah-test-default-pool-7dbea308-tk26]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>
+
+
+Name:              hz-custom-local-pv-2
+Labels:            <none>
+Annotations:       <none>
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Available
+Claim:             
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-4glt, gke-mizbah-test-default-pool-7dbea308-dz71, gke-mizbah-test-default-pool-7dbea308-tk26]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>
+
+
+Name:              mc-custom-local-pv
+Labels:            <none>
+Annotations:       <none>
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Available
+Claim:             
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-4glt]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>
+
+
+Name:              pvc-7a92637d-2311-4dc7-bdc0-85aeec6070cb
+Labels:            topology.kubernetes.io/region=us-central1
+                   topology.kubernetes.io/zone=us-central1-c
+Annotations:       pv.kubernetes.io/migrated-to: pd.csi.storage.gke.io
+                   pv.kubernetes.io/provisioned-by: kubernetes.io/gce-pd
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      standard
+Status:            Terminating (lasts 58m)
+Claim:             default/mancenter-storage-test-custom-hazelcast-mancenter-0
+Reclaim Policy:    Delete
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          8Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        topology.kubernetes.io/zone in [us-central1-c]
+                   topology.kubernetes.io/region in [us-central1]
+Message:           
+Source:
+    Type:       GCEPersistentDisk (a Persistent Disk resource in Google Compute Engine)
+    PDName:     pvc-7a92637d-2311-4dc7-bdc0-85aeec6070cb
+    FSType:     ext4
+    Partition:  0
+    ReadOnly:   false
+Events:         <none>

@@ -1,0 +1,456 @@
+Name:         test-custom-hazelcast-0
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-test-default-pool-7dbea308-dz71/10.92.18.25
+Start Time:   Tue, 26 Jul 2022 17:55:34 +0300
+Labels:       app.kubernetes.io/instance=test-custom
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=test-custom-hazelcast-6c45996c95
+              helm.sh/chart=hazelcast-5.4.2
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=test-custom-hazelcast-0
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.184.1.6
+IPs:
+  IP:           10.184.1.6
+Controlled By:  StatefulSet/test-custom-hazelcast
+Containers:
+  test-custom-hazelcast:
+    Container ID:   containerd://324801596623197c6c34e6c670ee6a48a42d85aea12ac39584223be6c78f20f9
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      5701/TCP
+    State:          Running
+      Started:      Tue, 26 Jul 2022 17:55:55 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   test-custom-hazelcast-0 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bz4dm (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      test-custom-hazelcast-configuration
+    Optional:  false
+  kube-api-access-bz4dm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  15m   default-scheduler  Successfully assigned default/test-custom-hazelcast-0 to gke-mizbah-test-default-pool-7dbea308-dz71
+  Normal  Pulling    15m   kubelet            Pulling image "hazelcast/hazelcast:5.1.2"
+  Normal  Pulled     15m   kubelet            Successfully pulled image "hazelcast/hazelcast:5.1.2" in 18.770951839s
+  Normal  Created    15m   kubelet            Created container test-custom-hazelcast
+  Normal  Started    15m   kubelet            Started container test-custom-hazelcast
+
+
+Name:         test-custom-hazelcast-1
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-test-default-pool-7dbea308-tk26/10.92.18.17
+Start Time:   Tue, 26 Jul 2022 17:56:35 +0300
+Labels:       app.kubernetes.io/instance=test-custom
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=test-custom-hazelcast-6c45996c95
+              helm.sh/chart=hazelcast-5.4.2
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=test-custom-hazelcast-1
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.184.0.4
+IPs:
+  IP:           10.184.0.4
+Controlled By:  StatefulSet/test-custom-hazelcast
+Containers:
+  test-custom-hazelcast:
+    Container ID:   containerd://3184930afa343b4e232181e00eae4fb53d033ec25227ab5294030e991f32622b
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      5701/TCP
+    State:          Running
+      Started:      Tue, 26 Jul 2022 17:56:58 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   test-custom-hazelcast-1 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-c5rc7 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      test-custom-hazelcast-configuration
+    Optional:  false
+  kube-api-access-c5rc7:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  14m   default-scheduler  Successfully assigned default/test-custom-hazelcast-1 to gke-mizbah-test-default-pool-7dbea308-tk26
+  Normal  Pulling    14m   kubelet            Pulling image "hazelcast/hazelcast:5.1.2"
+  Normal  Pulled     14m   kubelet            Successfully pulled image "hazelcast/hazelcast:5.1.2" in 21.790001527s
+  Normal  Created    14m   kubelet            Created container test-custom-hazelcast
+  Normal  Started    14m   kubelet            Started container test-custom-hazelcast
+
+
+Name:         test-custom-hazelcast-2
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-test-default-pool-7dbea308-4glt/10.92.18.26
+Start Time:   Tue, 26 Jul 2022 17:57:35 +0300
+Labels:       app.kubernetes.io/instance=test-custom
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=test-custom-hazelcast-6c45996c95
+              helm.sh/chart=hazelcast-5.4.2
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=test-custom-hazelcast-2
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.184.2.7
+IPs:
+  IP:           10.184.2.7
+Controlled By:  StatefulSet/test-custom-hazelcast
+Containers:
+  test-custom-hazelcast:
+    Container ID:   containerd://8c90852e5717adb975e2a3a53de74fadb9225fcb58af59424f46ebf8c547af83
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      5701/TCP
+    State:          Running
+      Started:      Tue, 26 Jul 2022 17:58:04 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   test-custom-hazelcast-2 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7wxbq (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      test-custom-hazelcast-configuration
+    Optional:  false
+  kube-api-access-7wxbq:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  13m   default-scheduler  Successfully assigned default/test-custom-hazelcast-2 to gke-mizbah-test-default-pool-7dbea308-4glt
+  Normal  Pulling    13m   kubelet            Pulling image "hazelcast/hazelcast:5.1.2"
+  Normal  Pulled     13m   kubelet            Successfully pulled image "hazelcast/hazelcast:5.1.2" in 27.905891481s
+  Normal  Created    13m   kubelet            Created container test-custom-hazelcast
+  Normal  Started    13m   kubelet            Started container test-custom-hazelcast
+
+
+Name:         test-custom-hazelcast-mancenter-0
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-test-default-pool-7dbea308-dz71/10.92.18.25
+Start Time:   Tue, 26 Jul 2022 17:55:34 +0300
+Labels:       app.kubernetes.io/instance=test-custom
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast-mancenter
+              controller-revision-hash=test-custom-hazelcast-mancenter-677b7d4895
+              helm.sh/chart=hazelcast-5.4.2
+              role=mancenter
+              statefulset.kubernetes.io/pod-name=test-custom-hazelcast-mancenter-0
+Annotations:  <none>
+Status:       Running
+IP:           10.184.1.7
+IPs:
+  IP:           10.184.1.7
+Controlled By:  StatefulSet/test-custom-hazelcast-mancenter
+Containers:
+  test-custom-hazelcast-mancenter:
+    Container ID:   containerd://862f8ee74e3ace00e91fe96d6ab509269f91c10ff67f19114c0b17feb3735d26
+    Image:          hazelcast/management-center:5.1.3
+    Image ID:       docker.io/hazelcast/management-center@sha256:f9584e97d5dad0dacb8663bfa8516ed2da44bbbe40ba38d6ab4c0118f2778ee1
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Tue, 26 Jul 2022 17:56:13 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:8081/health delay=30s timeout=5s period=10s #success=1 #failure=3
+    Readiness:      tcp-socket :8080 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MC_INIT_CMD:  ./bin/mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml; 
+      JAVA_OPTS:     -Dhazelcast.mc.healthCheck.enable=true -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false 
+    Mounts:
+      /config from config (rw)
+      /data from mancenter-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dgs72 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  mancenter-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mancenter-storage-test-custom-hazelcast-mancenter-0
+    ReadOnly:   false
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      test-custom-hazelcast-mancenter-configuration
+    Optional:  false
+  kube-api-access-dgs72:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason                  Age   From                     Message
+  ----    ------                  ----  ----                     -------
+  Normal  Scheduled               15m   default-scheduler        Successfully assigned default/test-custom-hazelcast-mancenter-0 to gke-mizbah-test-default-pool-7dbea308-dz71
+  Normal  SuccessfulAttachVolume  15m   attachdetach-controller  AttachVolume.Attach succeeded for volume "pvc-9a44c772-3141-462b-be33-d54dd1ab72a8"
+  Normal  Pulling                 15m   kubelet                  Pulling image "hazelcast/management-center:5.1.3"
+  Normal  Pulled                  14m   kubelet                  Successfully pulled image "hazelcast/management-center:5.1.3" in 28.583363753s
+  Normal  Created                 14m   kubelet                  Created container test-custom-hazelcast-mancenter
+  Normal  Started                 14m   kubelet                  Started container test-custom-hazelcast-mancenter
+
+
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.188.0.1
+IPs:               10.188.0.1
+Port:              https  443/TCP
+TargetPort:        443/TCP
+Endpoints:         34.121.55.32:443
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              test-custom-hazelcast
+Namespace:         default
+Labels:            app.kubernetes.io/instance=test-custom
+                   app.kubernetes.io/managed-by=Helm
+                   app.kubernetes.io/name=hazelcast
+                   helm.sh/chart=hazelcast-5.4.2
+Annotations:       cloud.google.com/neg: {"ingress":true}
+                   meta.helm.sh/release-name: test-custom
+                   meta.helm.sh/release-namespace: default
+Selector:          app.kubernetes.io/instance=test-custom,app.kubernetes.io/name=hazelcast,role=hazelcast
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                None
+IPs:               None
+Port:              hzport  5701/TCP
+TargetPort:        hazelcast/TCP
+Endpoints:         10.184.0.4:5701,10.184.1.6:5701,10.184.2.7:5701
+Session Affinity:  None
+Events:            <none>
+
+
+Name:                     test-custom-hazelcast-mancenter
+Namespace:                default
+Labels:                   app.kubernetes.io/instance=test-custom
+                          app.kubernetes.io/managed-by=Helm
+                          app.kubernetes.io/name=hazelcast-mancenter
+                          helm.sh/chart=hazelcast-5.4.2
+Annotations:              cloud.google.com/neg: {"ingress":true}
+                          meta.helm.sh/release-name: test-custom
+                          meta.helm.sh/release-namespace: default
+Selector:                 app.kubernetes.io/instance=test-custom,app.kubernetes.io/name=hazelcast-mancenter,role=mancenter
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.188.2.109
+IPs:                      10.188.2.109
+LoadBalancer Ingress:     35.193.162.2
+Port:                     http  8080/TCP
+TargetPort:               mancenter/TCP
+NodePort:                 http  30006/TCP
+Endpoints:                10.184.1.7:8080
+Port:                     https  443/TCP
+TargetPort:               mancenter/TCP
+NodePort:                 https  32248/TCP
+Endpoints:                10.184.1.7:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  15m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   15m   service-controller  Ensured load balancer
+
+
+Name:               test-custom-hazelcast
+Namespace:          default
+CreationTimestamp:  Tue, 26 Jul 2022 17:55:32 +0300
+Selector:           app.kubernetes.io/instance=test-custom,app.kubernetes.io/name=hazelcast,role=hazelcast
+Labels:             app.kubernetes.io/instance=test-custom
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=hazelcast
+                    helm.sh/chart=hazelcast-5.4.2
+Annotations:        meta.helm.sh/release-name: test-custom
+                    meta.helm.sh/release-namespace: default
+Replicas:           3 desired | 3 total
+Update Strategy:    RollingUpdate
+  Partition:        0
+Pods Status:        3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:           app.kubernetes.io/instance=test-custom
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=hazelcast
+                    helm.sh/chart=hazelcast-5.4.2
+                    role=hazelcast
+  Annotations:      checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+  Service Account:  test-custom-hazelcast
+  Containers:
+   test-custom-hazelcast:
+    Image:      hazelcast/hazelcast:5.1.2
+    Port:       5701/TCP
+    Host Port:  5701/TCP
+    Liveness:   http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:  http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:    (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+  Volumes:
+   hazelcast-storage:
+    Type:       ConfigMap (a volume populated by a ConfigMap)
+    Name:       test-custom-hazelcast-configuration
+    Optional:   false
+Volume Claims:  <none>
+Events:
+  Type    Reason            Age   From                    Message
+  ----    ------            ----  ----                    -------
+  Normal  SuccessfulCreate  15m   statefulset-controller  create Pod test-custom-hazelcast-0 in StatefulSet test-custom-hazelcast successful
+  Normal  SuccessfulCreate  14m   statefulset-controller  create Pod test-custom-hazelcast-1 in StatefulSet test-custom-hazelcast successful
+  Normal  SuccessfulCreate  13m   statefulset-controller  create Pod test-custom-hazelcast-2 in StatefulSet test-custom-hazelcast successful
+
+
+Name:               test-custom-hazelcast-mancenter
+Namespace:          default
+CreationTimestamp:  Tue, 26 Jul 2022 17:55:32 +0300
+Selector:           app.kubernetes.io/instance=test-custom,app.kubernetes.io/name=hazelcast-mancenter,role=mancenter
+Labels:             app.kubernetes.io/instance=test-custom
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=hazelcast-mancenter
+                    helm.sh/chart=hazelcast-5.4.2
+Annotations:        meta.helm.sh/release-name: test-custom
+                    meta.helm.sh/release-namespace: default
+Replicas:           1 desired | 1 total
+Update Strategy:    RollingUpdate
+  Partition:        0
+Pods Status:        1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:           app.kubernetes.io/instance=test-custom
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=hazelcast-mancenter
+                    helm.sh/chart=hazelcast-5.4.2
+                    role=mancenter
+  Service Account:  test-custom-hazelcast
+  Containers:
+   test-custom-hazelcast-mancenter:
+    Image:      hazelcast/management-center:5.1.3
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Liveness:   http-get http://:8081/health delay=30s timeout=5s period=10s #success=1 #failure=3
+    Readiness:  tcp-socket :8080 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MC_INIT_CMD:  ./bin/mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml; 
+      JAVA_OPTS:     -Dhazelcast.mc.healthCheck.enable=true -DserviceName=test-custom-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false 
+    Mounts:
+      /config from config (rw)
+      /data from mancenter-storage (rw)
+  Volumes:
+   config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      test-custom-hazelcast-mancenter-configuration
+    Optional:  false
+   mancenter-storage:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+Volume Claims:
+  Name:          mancenter-storage
+  StorageClass:  
+  Labels:        app.kubernetes.io/instance=test-custom
+                 app.kubernetes.io/managed-by=Helm
+                 app.kubernetes.io/name=hazelcast-mancenter
+                 helm.sh/chart=hazelcast-5.4.2
+  Annotations:   <none>
+  Capacity:      8Gi
+  Access Modes:  [ReadWriteOnce]
+Events:
+  Type    Reason            Age   From                    Message
+  ----    ------            ----  ----                    -------
+  Normal  SuccessfulCreate  15m   statefulset-controller  create Pod test-custom-hazelcast-mancenter-0 in StatefulSet test-custom-hazelcast-mancenter successful

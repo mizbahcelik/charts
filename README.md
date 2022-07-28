@@ -70,7 +70,7 @@ You can see they are bound as above. If they are not, this is the list of potent
 
 Some Kubernetes Providers do not offer default storage class so you have to create one and pass it to helm installation.
 
-Create `storage.yaml` file and apply via `kubectl apply -f storage.yaml`
+Create `storage.yaml` file and apply via `k apply -f storage.yaml`
 
 ```
 kind: StorageClass
@@ -129,7 +129,7 @@ $ kubectl get pvc
 To delete them run:
 
 ```
-$ kubectl delete pvc <name-of-the-pvc>
+$ k delete pvc <name-of-the-pvc>
 ```
 
 ### "65534: must be in the ranges: [x, y]" or "65534 is not an allowed group"

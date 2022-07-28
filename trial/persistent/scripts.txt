@@ -1,0 +1,46 @@
+# $HOME/hazelcast-works/repos/charts/trial/jars
+# kubectl cp $HOME/hazelcast-works/repos/charts/trial/jars/copied2.txt default/test-custom-hazelcast-0:/data/custom/
+
+https://console.cloud.google.com/compute/instancesDetail/zones/us-central1-c/instances/gke-mizbah-test-default-pool-7dbea308-4glt
+
+
+gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-4glt"  --project "hazelcast-33"
+gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-dz71"  --project "hazelcast-33"
+gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-tk26"  --project "hazelcast-33"
+
+gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-4glt:~
+gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-dz71:~
+gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-tk26:~
+
+
+
+k apply -f trial/persistent/persistent-test/templates/storage.yaml &&
+k apply -f trial/persistent/persistent-test/templates/pv-hz-0.yaml &&
+k apply -f trial/persistent/persistent-test/templates/pv-hz-1.yaml && 
+k apply -f trial/persistent/persistent-test/templates/pv-hz-2.yaml && 
+k apply -f trial/persistent/persistent-test/templates/pv-mc.yaml && 
+k apply -f trial/persistent/persistent-test/templates/pvc-mc.yaml && 
+k apply -f trial/persistent/persistent-test/templates/pvc-hz.yaml 
+
+
+k delete pv $(kubectl get pv | awk '{print $1}') &
+k delete pvc $(kubectl get pvc | awk '{print $1}') & 
+k delete storageclass local-storage
+
+k delete pv --grace-period=0 --force $(kubectl get pv | awk '{print $1}') &&
+k delete pvc --grace-period=0 --force $(kubectl get pvc | awk '{print $1}')
+
+k patch pv hz-custom-local-pv-0 -p '{"metadata":{"finalizers":null}}' &&
+k patch pv hz-custom-local-pv-1 -p '{"metadata":{"finalizers":null}}' &&
+k patch pv hz-custom-local-pv-2 -p '{"metadata":{"finalizers":null}}' &&
+k patch pv mc-custom-local-pv -p '{"metadata":{"finalizers":null}}'
+
+k patch pvc hz-custom-local-pv-claim -p '{"metadata":{"finalizers":null}}' &&
+k patch pvc mc-custom-local-pv-claim -p '{"metadata":{"finalizers":null}}'
+
+
+
+
+customVolume:
+  persistentVolumeClaim:
+    claimName: hz-custom-local-pv-claim

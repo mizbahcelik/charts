@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hz-custom-local-pv-2
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /home/mizbah_celik/custom
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: kubernetes.io/hostname
+  #         operator: In
+  #         values:
+  #         - gke-mizbah-test-default-pool-7dbea308-4glt
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: kubernetes.io/hostname
+  #         operator: In
+  #         values:
+  #         - gke-mizbah-test-default-pool-7dbea308-dz71
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: kubernetes.io/hostname
+  #         operator: In
+  #         values:
+  #         - gke-mizbah-test-default-pool-7dbea308-4glt
+  #         - gke-mizbah-test-default-pool-7dbea308-dz71
+  #         - gke-mizbah-test-default-pool-7dbea308-tk26          
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: kubernetes.io/hostname
+  #         operator: In
+  #         values:
+  #         - minikube
+
+# # $HOME/hazelcast-works/repos/charts/trial/jars
+# # kubectl cp $HOME/hazelcast-works/repos/charts/trial/jars/copied2.txt default/test-custom-hazelcast-0:/data/custom/
+
+# https://console.cloud.google.com/compute/instancesDetail/zones/us-central1-c/instances/gke-mizbah-test-default-pool-7dbea308-4glt
+
+
+# gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-4glt"  --project "hazelcast-33"
+# gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-dz71"  --project "hazelcast-33"
+# gcloud compute ssh --zone "us-central1-c" "gke-mizbah-test-default-pool-7dbea308-tk26"  --project "hazelcast-33"
+
+# gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-4glt:~
+# gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-dz71:~
+# gcloud compute scp --zone "us-central1-c" --recurse custom mizbah_celik@gke-mizbah-test-default-pool-7dbea308-tk26:~
+

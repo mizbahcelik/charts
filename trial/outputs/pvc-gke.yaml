@@ -1,0 +1,63 @@
+Name:          hz-custom-local-pv-claim
+Namespace:     default
+StorageClass:  local-storage
+Status:        Bound
+Volume:        hz-custom-local-pv-1
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      1Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                Age                 From                         Message
+  ----    ------                ----                ----                         -------
+  Normal  WaitForFirstConsumer  32m (x11 over 35m)  persistentvolume-controller  waiting for first consumer to be created before binding
+
+
+Name:          mancenter-storage-test-custom-hazelcast-mancenter-0
+Namespace:     default
+StorageClass:  standard
+Status:        Bound
+Volume:        pvc-bcf4f45c-732e-4961-b82d-3c7424dfbb1b
+Labels:        app.kubernetes.io/instance=test-custom
+               app.kubernetes.io/managed-by=Helm
+               app.kubernetes.io/name=hazelcast-mancenter
+               helm.sh/chart=hazelcast-5.4.2
+               role=mancenter
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+               volume.beta.kubernetes.io/storage-provisioner: pd.csi.storage.gke.io
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      8Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                 Age                From                                                                                              Message
+  ----    ------                 ----               ----                                                                                              -------
+  Normal  ExternalProvisioning   32m (x2 over 32m)  persistentvolume-controller                                                                       waiting for a volume to be created, either by external provisioner "pd.csi.storage.gke.io" or manually created by system administrator
+  Normal  Provisioning           32m                pd.csi.storage.gke.io_gke-8d18eeeec93746aa8a05-ba53-dfd5-vm_cd323c5c-fded-4d6e-a912-3aff69b93dd9  External provisioner is provisioning volume for claim "default/mancenter-storage-test-custom-hazelcast-mancenter-0"
+  Normal  ProvisioningSucceeded  32m                pd.csi.storage.gke.io_gke-8d18eeeec93746aa8a05-ba53-dfd5-vm_cd323c5c-fded-4d6e-a912-3aff69b93dd9  Successfully provisioned volume pvc-bcf4f45c-732e-4961-b82d-3c7424dfbb1b
+
+
+Name:          mc-custom-local-pv-claim
+Namespace:     default
+StorageClass:  local-storage
+Status:        Bound
+Volume:        hz-custom-local-pv-2
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      1Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                Age                 From                         Message
+  ----    ------                ----                ----                         -------
+  Normal  WaitForFirstConsumer  32m (x11 over 35m)  persistentvolume-controller  waiting for first consumer to be created before binding
+  Normal  WaitForPodScheduled   32m                 persistentvolume-controller  waiting for pod test-custom-hazelcast-mancenter-0 to be scheduled

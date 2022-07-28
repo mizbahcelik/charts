@@ -76,7 +76,13 @@ affinity:
 # tolerations:
 
 # topologySpreadConstraints enable deployment spread based on topology
-topologySpreadConstraints: {}
+topologySpreadConstraints: 
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: hazelcast 
 
 # nodeSelector is an array of Hazelcast Node labels for POD assignments
 # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
@@ -157,7 +163,7 @@ service:
   # If not set and create is true, a name is generated using the fullname template
   # name:
   # type defines the Kubernetes service type ('ClusterIP', 'LoadBalancer', or 'NodePort')
-  type: ClusterIP
+  type: LoadBalancer
   # port is the Kubernetes service port
   port: 5701
   # Static NodePort, if set.
@@ -212,7 +218,9 @@ metrics:
       prometheus.io/port: "8080"
 
 # customVolume is the configuration for any volume mounted as '/data/custom/' and exposed to classpath (e.g. to mount a volume with custom JARs)
-# customVolume:
+customVolume:
+  persistentVolumeClaim:
+    claimName: hz-custom-local-pv-claim
 
 # externalVolume is the configuration for any volume mounted as '/data/external/'
 # externalVolume:
@@ -375,7 +383,9 @@ mancenter:
     annotations: {}
 
   # customVolume is the configuration for any volume mounted as '/data/custom/' (e.g. to mount a volume with custom JARs)
-  # customVolume:
+  customVolume:
+    persistentVolumeClaim:
+      claimName: mc-custom-local-pv-claim
 
   # Hazelcast Management Center Liveness probe
   livenessProbe:

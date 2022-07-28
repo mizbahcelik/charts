@@ -1,0 +1,54 @@
+NAME                                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+hz-custom-local-pv-claim                              Bound    hz-custom-local-pv-1                       1Gi        RWO            local-storage   53m
+mancenter-storage-test-custom-hazelcast-mancenter-0   Bound    pvc-bcf4f45c-732e-4961-b82d-3c7424dfbb1b   8Gi        RWO            standard        50m
+mc-custom-local-pv-claim                              Bound    hz-custom-local-pv-2                       1Gi        RWO            local-storage   53m
+
+
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                         STORAGECLASS    REASON   AGE
+hz-custom-local-pv-0                       1Gi        RWO            Retain           Available                                                                 local-storage            60m
+hz-custom-local-pv-1                       1Gi        RWO            Retain           Bound       default/hz-custom-local-pv-claim                              local-storage            58m
+hz-custom-local-pv-2                       1Gi        RWO            Retain           Bound       default/mc-custom-local-pv-claim                              local-storage            58m
+mc-custom-local-pv                         1Gi        RWO            Retain           Available                                                                 local-storage            57m
+pvc-bcf4f45c-732e-4961-b82d-3c7424dfbb1b   8Gi        RWO            Delete           Bound       default/mancenter-storage-test-custom-hazelcast-mancenter-0   standard                 54m
+
+
+Name:              hz-custom-local-pv-1
+Labels:            <none>
+Annotations:       pv.kubernetes.io/bound-by-controller: yes
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Bound
+Claim:             default/hz-custom-local-pv-claim
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-dz71]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>
+
+
+Name:              hz-custom-local-pv-2
+Labels:            <none>
+Annotations:       pv.kubernetes.io/bound-by-controller: yes
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-storage
+Status:            Bound
+Claim:             default/mc-custom-local-pv-claim
+Reclaim Policy:    Retain
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          1Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [gke-mizbah-test-default-pool-7dbea308-tk26]
+Message:           
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/mizbah_celik/custom
+Events:    <none>

@@ -1,0 +1,252 @@
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    container.googleapis.com/instance_id: "1560711257906091147"
+    csi.volume.kubernetes.io/nodeid: '{"pd.csi.storage.gke.io":"projects/hazelcast-33/zones/us-central1-c/instances/gke-mizbah-test-default-pool-7dbea308-4glt"}'
+    node.alpha.kubernetes.io/ttl: "0"
+    node.gke.io/last-applied-node-labels: cloud.google.com/gke-boot-disk=pd-standard,cloud.google.com/gke-container-runtime=containerd,cloud.google.com/gke-cpu-scaling-level=2,cloud.google.com/gke-max-pods-per-node=110,cloud.google.com/gke-nodepool=default-pool,cloud.google.com/gke-os-distribution=cos,cloud.google.com/machine-family=e2
+    node.gke.io/last-applied-node-taints: ""
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  creationTimestamp: "2022-07-26T08:52:56Z"
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/instance-type: e2-medium
+    beta.kubernetes.io/os: linux
+    cloud.google.com/gke-boot-disk: pd-standard
+    cloud.google.com/gke-container-runtime: containerd
+    cloud.google.com/gke-cpu-scaling-level: "2"
+    cloud.google.com/gke-max-pods-per-node: "110"
+    cloud.google.com/gke-nodepool: default-pool
+    cloud.google.com/gke-os-distribution: cos
+    cloud.google.com/machine-family: e2
+    failure-domain.beta.kubernetes.io/region: us-central1
+    failure-domain.beta.kubernetes.io/zone: us-central1-c
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: gke-mizbah-test-default-pool-7dbea308-4glt
+    kubernetes.io/os: linux
+    node.kubernetes.io/instance-type: e2-medium
+    topology.gke.io/zone: us-central1-c
+    topology.kubernetes.io/region: us-central1
+    topology.kubernetes.io/zone: us-central1-c
+  name: gke-mizbah-test-default-pool-7dbea308-4glt
+  resourceVersion: "91917"
+  uid: b4a07699-dc81-4000-8f84-1fd96dd7f108
+spec:
+  podCIDR: 10.184.2.0/24
+  podCIDRs:
+  - 10.184.2.0/24
+  providerID: gce://hazelcast-33/us-central1-c/gke-mizbah-test-default-pool-7dbea308-4glt
+status:
+  addresses:
+  - address: 10.92.18.26
+    type: InternalIP
+  - address: 34.70.225.19
+    type: ExternalIP
+  - address: gke-mizbah-test-default-pool-7dbea308-4glt.c.hazelcast-33.internal
+    type: InternalDNS
+  - address: gke-mizbah-test-default-pool-7dbea308-4glt.c.hazelcast-33.internal
+    type: Hostname
+  allocatable:
+    attachable-volumes-gce-pd: "15"
+    cpu: 940m
+    ephemeral-storage: "47093746742"
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 2880212Ki
+    pods: "110"
+  capacity:
+    attachable-volumes-gce-pd: "15"
+    cpu: "2"
+    ephemeral-storage: 98868448Ki
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 4026068Ki
+    pods: "110"
+  conditions:
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: docker overlay2 is functioning properly
+    reason: NoCorruptDockerOverlay2
+    status: "False"
+    type: CorruptDockerOverlay2
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: node is functioning properly
+    reason: NoFrequentUnregisterNetDevice
+    status: "False"
+    type: FrequentUnregisterNetDevice
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: kubelet is functioning properly
+    reason: NoFrequentKubeletRestart
+    status: "False"
+    type: FrequentKubeletRestart
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: docker is functioning properly
+    reason: NoFrequentDockerRestart
+    status: "False"
+    type: FrequentDockerRestart
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: containerd is functioning properly
+    reason: NoFrequentContainerdRestart
+    status: "False"
+    type: FrequentContainerdRestart
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: kernel has no deadlock
+    reason: KernelHasNoDeadlock
+    status: "False"
+    type: KernelDeadlock
+  - lastHeartbeatTime: "2022-07-26T12:48:29Z"
+    lastTransitionTime: "2022-07-26T08:53:01Z"
+    message: Filesystem is not read-only
+    reason: FilesystemIsNotReadOnly
+    status: "False"
+    type: ReadonlyFilesystem
+  - lastHeartbeatTime: "2022-07-26T08:52:57Z"
+    lastTransitionTime: "2022-07-26T08:52:57Z"
+    message: NodeController create implicit route
+    reason: RouteCreated
+    status: "False"
+    type: NetworkUnavailable
+  - lastHeartbeatTime: "2022-07-26T12:44:53Z"
+    lastTransitionTime: "2022-07-26T08:51:57Z"
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
+    status: "False"
+    type: MemoryPressure
+  - lastHeartbeatTime: "2022-07-26T12:44:53Z"
+    lastTransitionTime: "2022-07-26T08:51:57Z"
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
+    status: "False"
+    type: DiskPressure
+  - lastHeartbeatTime: "2022-07-26T12:44:53Z"
+    lastTransitionTime: "2022-07-26T08:51:57Z"
+    message: kubelet has sufficient PID available
+    reason: KubeletHasSufficientPID
+    status: "False"
+    type: PIDPressure
+  - lastHeartbeatTime: "2022-07-26T12:44:53Z"
+    lastTransitionTime: "2022-07-26T08:52:56Z"
+    message: kubelet is posting ready status. AppArmor enabled
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 10250
+  images:
+  - names:
+    - gke.gcr.io/kube-proxy-amd64:v1.22.8-gke.202
+    - k8s.gcr.io/kube-proxy-amd64:v1.22.8-gke.202
+    sizeBytes: 107563719
+  - names:
+    - asia.gcr.io/gke-release-staging/event-exporter@sha256:34b034af960047020f4674151bbb2b55878f82a0b76dabca81b518e9fe82180d
+    - eu.gcr.io/gke-release-staging/event-exporter@sha256:34b034af960047020f4674151bbb2b55878f82a0b76dabca81b518e9fe82180d
+    - gcr.io/gke-release-staging/event-exporter@sha256:34b034af960047020f4674151bbb2b55878f82a0b76dabca81b518e9fe82180d
+    - asia.gcr.io/gke-release-staging/event-exporter:v0.3.4-gke.0
+    - eu.gcr.io/gke-release-staging/event-exporter:v0.3.4-gke.0
+    sizeBytes: 48883002
+  - names:
+    - asia.gcr.io/gke-release-staging/prometheus-to-sd@sha256:e739643c3939ba0b161425f45a1989eedfc4a3b166db9a7100863296b4c70510
+    - eu.gcr.io/gke-release-staging/prometheus-to-sd@sha256:e739643c3939ba0b161425f45a1989eedfc4a3b166db9a7100863296b4c70510
+    - gcr.io/gke-release-staging/prometheus-to-sd@sha256:e739643c3939ba0b161425f45a1989eedfc4a3b166db9a7100863296b4c70510
+    - asia.gcr.io/gke-release-staging/prometheus-to-sd:v0.11.1-gke.1
+    - eu.gcr.io/gke-release-staging/prometheus-to-sd:v0.11.1-gke.1
+    sizeBytes: 48742184
+  - names:
+    - gke.gcr.io/prometheus-to-sd@sha256:39fef38cc66dbf89af3df1e5f963bb5ce435148e60a3549683e60c444a894f7b
+    - gke.gcr.io/prometheus-to-sd:v0.11.3-gke.0
+    sizeBytes: 48053500
+  - names:
+    - gke.gcr.io/fluent-bit@sha256:b797294a438a28d8a3c469327c4eee4acf2617efaee58e4b681d3d2434354bc0
+    - gke.gcr.io/fluent-bit:v1.8.7-gke.1
+    sizeBytes: 44297863
+  - names:
+    - gke.gcr.io/gcp-compute-persistent-disk-csi-driver@sha256:915254285ddf35e99130fb22b39707e8cd9a23ba6405f901d78a8ba19fe58a55
+    - gke.gcr.io/gcp-compute-persistent-disk-csi-driver:v1.7.2-gke.2
+    sizeBytes: 43232664
+  - names:
+    - gke.gcr.io/k8s-dns-kube-dns@sha256:d98863b374c0b1c2c01548913a61c7e27ba6621157e77554b9b7e4a2c2f4c2a8
+    - gke.gcr.io/k8s-dns-kube-dns:1.21.4-gke.0
+    sizeBytes: 42794615
+  - names:
+    - gke.gcr.io/k8s-dns-sidecar@sha256:94fa1d9da7eab746c2c352de8c8b845a1ac2ab6d636a3ed5e899beec6e8e15d0
+    - gke.gcr.io/k8s-dns-sidecar:1.21.4-gke.0
+    sizeBytes: 40769160
+  - names:
+    - gke.gcr.io/k8s-dns-dnsmasq-nanny@sha256:149453e47c5bcd62f9f208f1e9bba5b175b7d3fedf4020820491ff7c76adf0ce
+    - gke.gcr.io/k8s-dns-dnsmasq-nanny:1.21.4-gke.0
+    sizeBytes: 39897819
+  - names:
+    - gke.gcr.io/gke-metrics-agent@sha256:3ee828810e005acd41add7f426c3667121738d7e85965fd1e29375347ba570dc
+    - gke.gcr.io/gke-metrics-agent:1.8.3-gke.0
+    sizeBytes: 27090780
+  - names:
+    - gcr.io/gke-release/metrics-server-amd64@sha256:6e4907f3b45db9408f2e99414e8da18d9400948abd747d6519ad7d69d8136785
+    - gcr.io/gke-release/metrics-server-amd64:v0.4.5-gke.0
+    sizeBytes: 25341240
+  - names:
+    - gke.gcr.io/fluent-bit-gke-exporter@sha256:8c0d4d150bc42636d1449c810b808417352f5418e2d63c8f12833d9db2238e21
+    - gke.gcr.io/fluent-bit-gke-exporter:v0.17.1-gke.0
+    sizeBytes: 19656006
+  - names:
+    - asia.gcr.io/gke-release-staging/cluster-proportional-autoscaler@sha256:0f232ba18b63363e33f205d0242ef98324fb388434f8598c2fc8e967dca146bc
+    - eu.gcr.io/gke-release-staging/cluster-proportional-autoscaler@sha256:0f232ba18b63363e33f205d0242ef98324fb388434f8598c2fc8e967dca146bc
+    - gcr.io/gke-release-staging/cluster-proportional-autoscaler@sha256:0f232ba18b63363e33f205d0242ef98324fb388434f8598c2fc8e967dca146bc
+    - asia.gcr.io/gke-release-staging/cluster-proportional-autoscaler:1.8.4-gke.1
+    - eu.gcr.io/gke-release-staging/cluster-proportional-autoscaler:1.8.4-gke.1
+    sizeBytes: 16830362
+  - names:
+    - asia.gcr.io/gke-release-staging/cluster-proportional-autoscaler-amd64@sha256:e3f48b3d1e49cfa3e7f002020769c9cd01cd0e77bbc99dc133c7ab0f8097e989
+    - eu.gcr.io/gke-release-staging/cluster-proportional-autoscaler-amd64@sha256:e3f48b3d1e49cfa3e7f002020769c9cd01cd0e77bbc99dc133c7ab0f8097e989
+    - gcr.io/gke-release-staging/cluster-proportional-autoscaler-amd64@sha256:e3f48b3d1e49cfa3e7f002020769c9cd01cd0e77bbc99dc133c7ab0f8097e989
+    - asia.gcr.io/gke-release-staging/cluster-proportional-autoscaler-amd64:1.7.1-gke.0
+    - eu.gcr.io/gke-release-staging/cluster-proportional-autoscaler-amd64:1.7.1-gke.0
+    sizeBytes: 16572417
+  - names:
+    - asia.gcr.io/gke-release-staging/cpvpa-amd64@sha256:b802d79f207ea9cbc996cc208781ea34715fe796be68e5250da37b2ae73d42a6
+    - eu.gcr.io/gke-release-staging/cpvpa-amd64@sha256:b802d79f207ea9cbc996cc208781ea34715fe796be68e5250da37b2ae73d42a6
+    - gcr.io/gke-release-staging/cpvpa-amd64@sha256:b802d79f207ea9cbc996cc208781ea34715fe796be68e5250da37b2ae73d42a6
+    - asia.gcr.io/gke-release-staging/cpvpa-amd64:v0.8.3-gke.0
+    - eu.gcr.io/gke-release-staging/cpvpa-amd64:v0.8.3-gke.0
+    sizeBytes: 16376177
+  - names:
+    - gke.gcr.io/proxy-agent@sha256:45c27e752ed970b2766941c77044f53366000453f8f100f858ab13978051910a
+    - gke.gcr.io/proxy-agent:v0.0.27-gke.2
+    sizeBytes: 9701785
+  - names:
+    - asia.gcr.io/gke-release-staging/addon-resizer@sha256:e595f19b1661c38d89ec46cd1b57a8220db0e8aca336de60a4c06305174710d9
+    - eu.gcr.io/gke-release-staging/addon-resizer@sha256:e595f19b1661c38d89ec46cd1b57a8220db0e8aca336de60a4c06305174710d9
+    - gcr.io/gke-release-staging/addon-resizer@sha256:e595f19b1661c38d89ec46cd1b57a8220db0e8aca336de60a4c06305174710d9
+    - asia.gcr.io/gke-release-staging/addon-resizer:1.8.13-gke.0
+    - eu.gcr.io/gke-release-staging/addon-resizer:1.8.13-gke.0
+    sizeBytes: 9654882
+  - names:
+    - gke.gcr.io/csi-node-driver-registrar@sha256:7d0a2637defeb214b464617a2027e0008fb1001da6b4d0123c23ec29663c5645
+    - gke.gcr.io/csi-node-driver-registrar:v2.5.0-gke.1
+    sizeBytes: 9149099
+  - names:
+    - asia.gcr.io/google-containers/pause-amd64:3.0
+    - eu.gcr.io/google-containers/pause-amd64:3.0
+    - gcr.io/google-containers/pause-amd64:3.0
+    sizeBytes: 312520
+  - names:
+    - k8s.gcr.io/pause@sha256:1ff6c18fbef2045af6b9c16bf034cc421a29027b800e4f9b68ae9b1cb3e9ae07
+    - k8s.gcr.io/pause:3.5
+    sizeBytes: 301416
+  nodeInfo:
+    architecture: amd64
+    bootID: be8db936-96aa-47fb-b9e8-88d4f4e03c2c
+    containerRuntimeVersion: containerd://1.5.4
+    kernelVersion: 5.10.90+
+    kubeProxyVersion: v1.22.8-gke.202
+    kubeletVersion: v1.22.8-gke.202
+    machineID: 995b60f8bb8ba28621ffaff15e03bf2c
+    operatingSystem: linux
+    osImage: Container-Optimized OS from Google
+    systemUUID: 995b60f8-bb8b-a286-21ff-aff15e03bf2c

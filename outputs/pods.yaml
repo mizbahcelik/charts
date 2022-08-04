@@ -1,0 +1,247 @@
+Name:         hz-hazelcast-0
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-private-1-default-pool-4aabbd6d-k919/10.128.0.7
+Start Time:   Wed, 03 Aug 2022 13:30:24 +0300
+Labels:       app.kubernetes.io/instance=hz
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=hz-hazelcast-6db6bb84b5
+              helm.sh/chart=hazelcast-5.4.6
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=hz-hazelcast-0
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.24.2.9
+IPs:
+  IP:           10.24.2.9
+Controlled By:  StatefulSet/hz-hazelcast
+Containers:
+  hz-hazelcast:
+    Container ID:   containerd://ded8b40936c8a2297167415d07f45bfd45c07f52b0316373290714ce5bfbdb80
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 03 Aug 2022 13:30:25 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   hz-hazelcast-0 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=hz-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2sdg4 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      hz-hazelcast-configuration
+    Optional:  false
+  kube-api-access-2sdg4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         hz-hazelcast-1
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-private-1-default-pool-4aabbd6d-lhgf/10.128.0.6
+Start Time:   Wed, 03 Aug 2022 13:31:04 +0300
+Labels:       app.kubernetes.io/instance=hz
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=hz-hazelcast-6db6bb84b5
+              helm.sh/chart=hazelcast-5.4.6
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=hz-hazelcast-1
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.24.1.5
+IPs:
+  IP:           10.24.1.5
+Controlled By:  StatefulSet/hz-hazelcast
+Containers:
+  hz-hazelcast:
+    Container ID:   containerd://08020974e78a4da0b49064c5a35ac0f91b7dbb17a757810fbbad8e5d452afd79
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 03 Aug 2022 13:31:05 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   hz-hazelcast-1 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=hz-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-4c92p (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      hz-hazelcast-configuration
+    Optional:  false
+  kube-api-access-4c92p:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         hz-hazelcast-2
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-private-1-default-pool-4aabbd6d-60mh/10.128.0.5
+Start Time:   Wed, 03 Aug 2022 13:31:44 +0300
+Labels:       app.kubernetes.io/instance=hz
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast
+              controller-revision-hash=hz-hazelcast-6db6bb84b5
+              helm.sh/chart=hazelcast-5.4.6
+              role=hazelcast
+              statefulset.kubernetes.io/pod-name=hz-hazelcast-2
+Annotations:  checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+Status:       Running
+IP:           10.24.0.7
+IPs:
+  IP:           10.24.0.7
+Controlled By:  StatefulSet/hz-hazelcast
+Containers:
+  hz-hazelcast:
+    Container ID:   containerd://9f00fb67522387c2557749bc15c7ed05fdb2dcf1e720e1f2816d65db14b6c4c1
+    Image:          hazelcast/hazelcast:5.1.2
+    Image ID:       docker.io/hazelcast/hazelcast@sha256:b5b41db5c85aa6d0784d48b9684e3456e1940a43c147a0b2dbb4988db343b504
+    Port:           5701/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 03 Aug 2022 13:31:45 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Readiness:      http-get http://:5701/hazelcast/health/node-state delay=30s timeout=10s period=10s #success=1 #failure=10
+    Environment:
+      POD_NAME:   hz-hazelcast-2 (v1:metadata.name)
+      JAVA_OPTS:  -Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=hz-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   
+    Mounts:
+      /data/hazelcast from hazelcast-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2cdtb (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  hazelcast-storage:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      hz-hazelcast-configuration
+    Optional:  false
+  kube-api-access-2cdtb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         hz-hazelcast-mancenter-0
+Namespace:    default
+Priority:     0
+Node:         gke-mizbah-private-1-default-pool-4aabbd6d-k919/10.128.0.7
+Start Time:   Wed, 03 Aug 2022 13:30:24 +0300
+Labels:       app.kubernetes.io/instance=hz
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=hazelcast-mancenter
+              controller-revision-hash=hz-hazelcast-mancenter-5d5b69879
+              helm.sh/chart=hazelcast-5.4.6
+              role=mancenter
+              statefulset.kubernetes.io/pod-name=hz-hazelcast-mancenter-0
+Annotations:  <none>
+Status:       Running
+IP:           10.24.2.10
+IPs:
+  IP:           10.24.2.10
+Controlled By:  StatefulSet/hz-hazelcast-mancenter
+Containers:
+  hz-hazelcast-mancenter:
+    Container ID:   containerd://5e91a74110b73253d1c35aa539441688aff5983c271b60985ce3d690a45a2b2f
+    Image:          hazelcast/management-center:5.1.3
+    Image ID:       docker.io/hazelcast/management-center@sha256:f9584e97d5dad0dacb8663bfa8516ed2da44bbbe40ba38d6ab4c0118f2778ee1
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 03 Aug 2022 13:30:32 +0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:8081/health delay=30s timeout=5s period=10s #success=1 #failure=3
+    Readiness:      tcp-socket :8080 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MC_INIT_CMD:  ./bin/mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml; 
+      JAVA_OPTS:     -Dhazelcast.mc.healthCheck.enable=true -DserviceName=hz-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false 
+    Mounts:
+      /config from config (rw)
+      /data from mancenter-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-s7fss (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  mancenter-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mancenter-storage-hz-hazelcast-mancenter-0
+    ReadOnly:   false
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      hz-hazelcast-mancenter-configuration
+    Optional:  false
+  kube-api-access-s7fss:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>

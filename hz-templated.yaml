@@ -1,0 +1,487 @@
+---
+# Source: hazelcast/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hz-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+---
+# Source: hazelcast/templates/config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hz-hazelcast-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast.yaml: |-
+    hazelcast:
+      jet:
+        enabled: ${hz.jet.enabled}
+      network:
+        join:
+          kubernetes:
+            enabled: true
+            namespace: ${namespace}
+            service-name: ${serviceName}
+        rest-api:
+          enabled: true
+---
+# Source: hazelcast/templates/mancenter-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hz-hazelcast-mancenter-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast-client.yaml: |-
+    hazelcast-client:
+      network:
+        kubernetes:
+          enabled: true
+          namespace: ${namespace}
+          service-name: ${serviceName}
+---
+# Source: hazelcast/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hz-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - pods
+  - nodes
+  - services
+  verbs:
+  - get
+  - list
+---
+# Source: hazelcast/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hz-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hz-hazelcast-default
+subjects:
+- kind: ServiceAccount
+  name: hz-hazelcast
+  namespace: default
+---
+# Source: hazelcast/templates/mancenter-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hz-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: hazelcast-mancenter
+    app.kubernetes.io/instance: "hz"
+    role: mancenter
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: mancenter
+    name: http
+  - protocol: TCP
+    port: 443
+    targetPort: mancenter
+    name: https
+---
+# Source: hazelcast/templates/service-external.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hz-hazelcast-0-external
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+    pod: hz-hazelcast-0
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 127.0.0.2
+  ports:
+    - name: tcp-hazelcast
+      port: 5701
+      nodePort: null
+      targetPort: hazelcast
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "hz"
+    role: hazelcast
+    statefulset.kubernetes.io/pod-name: hz-hazelcast-0
+---
+# Source: hazelcast/templates/service-external.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hz-hazelcast-1-external
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+    pod: hz-hazelcast-1
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 127.0.0.3
+  ports:
+    - name: tcp-hazelcast
+      port: 5701
+      nodePort: null
+      targetPort: hazelcast
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "hz"
+    role: hazelcast
+    statefulset.kubernetes.io/pod-name: hz-hazelcast-1
+---
+# Source: hazelcast/templates/service-external.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hz-hazelcast-2-external
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+    pod: hz-hazelcast-2
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 127.0.0.4
+  ports:
+    - name: tcp-hazelcast
+      port: 5701
+      nodePort: null
+      targetPort: hazelcast
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "hz"
+    role: hazelcast
+    statefulset.kubernetes.io/pod-name: hz-hazelcast-2
+---
+# Source: hazelcast/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hz-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "hz"
+    role: hazelcast
+  ports:
+  - protocol: TCP
+    port: 5701
+    targetPort: hazelcast
+    name: hzport
+---
+# Source: hazelcast/templates/mancenter-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hz-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast-mancenter
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  serviceName: hz-hazelcast-mancenter
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast-mancenter
+      app.kubernetes.io/instance: "hz"
+      role: mancenter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast-mancenter
+        helm.sh/chart: hazelcast-5.4.6
+        app.kubernetes.io/instance: "hz"
+        app.kubernetes.io/managed-by: "Helm"
+        role: mancenter
+    spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: hz-hazelcast-mancenter
+        image: "hazelcast/management-center:5.1.3"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: mancenter
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: mancenter-storage
+          mountPath: /data
+        env:
+        - name: MC_INIT_CMD
+          value: "./bin/mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml; "
+        - name: JAVA_OPTS
+          value: " -Dhazelcast.mc.healthCheck.enable=true -DserviceName=hz-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      serviceAccountName: hz-hazelcast
+      automountServiceAccountToken: true
+      volumes:
+      - name: config
+        configMap:
+           name: hz-hazelcast-mancenter-configuration
+      - name: mancenter-storage
+    
+  volumeClaimTemplates:
+  - metadata:
+      name: mancenter-storage
+      labels:
+        app.kubernetes.io/name: hazelcast-mancenter
+        helm.sh/chart: "hazelcast-5.4.6"
+        app.kubernetes.io/instance: "hz"
+        app.kubernetes.io/managed-by: "Helm"
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "8Gi"
+---
+# Source: hazelcast/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hz-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm" 
+spec:
+  serviceName: hz-hazelcast
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast
+      app.kubernetes.io/instance: "hz"
+      role: hazelcast
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast
+        helm.sh/chart: hazelcast-5.4.6
+        app.kubernetes.io/instance: "hz"
+        app.kubernetes.io/managed-by: "Helm"
+        role: hazelcast
+      annotations:
+        checksum/hazelcast-config: c4b6a3fd48054c4013ca0c642202dfc072f46a56dd9e0062a942d6a8f565cb18
+    spec:
+      terminationGracePeriodSeconds: 600
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: hz-hazelcast
+        image: "hazelcast/hazelcast:5.1.2"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: hazelcast
+          containerPort: 5701
+        livenessProbe:
+          httpGet:
+            path: /hazelcast/health/node-state
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /hazelcast/health/node-state
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        volumeMounts:
+        - name: hazelcast-storage
+          mountPath: /data/hazelcast
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: JAVA_OPTS
+          value: "-Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=hz-hazelcast -Dnamespace=default -Dhz.jet.enabled=true -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      serviceAccountName: hz-hazelcast
+      automountServiceAccountToken: true
+      volumes:
+      - name: hazelcast-storage
+        configMap:
+          name: hz-hazelcast-configuration
+---
+# Source: hazelcast/templates/tests/test-hazelcast.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "hz-hazelcast-test-0i5jg"
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": hook-succeeded, hook-failed
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/component: "test"
+    role: test
+spec:
+  containers:
+  - name: "hz-hazelcast-test"
+    image: "alpine:latest"
+    command:
+    - "sh"
+    - "-c"
+    - |
+      set -ex
+      # Install required test tools
+      apk add -q curl
+      # Get the number of Hazelcast members in the cluster
+      CLUSTER_SIZE=$(curl hz-hazelcast:5701/hazelcast/health/cluster-size)
+      # Test the correct number of Hazelcast members
+      test ${CLUSTER_SIZE} -eq 3
+    resources:
+      null
+  restartPolicy: Never
+---
+# Source: hazelcast/templates/tests/test-management-center.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "hz-hazelcast-mancenter-test-9pfxi"
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": hook-succeeded, hook-failed
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-5.4.6
+    app.kubernetes.io/instance: "hz"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/component: "test"
+    role: test
+spec:
+  containers:
+  - name: "hz-hazelcast-mancenter-test"
+    image: "alpine:latest"
+    command:
+    - "sh"
+    - "-c"
+    - |
+      set -ex
+      # Install required test tools
+      apk add -q jq curl
+      # Get the HTTP Response Code of the Health Check
+      HEALTH_CHECK_HTTP_RESPONSE_CODE=$(curl --write-out %{http_code} --silent --output /dev/null hz-hazelcast-mancenter:8080/health)
+      # Test the MC HTTP RESPONSE CODE
+      test ${HEALTH_CHECK_HTTP_RESPONSE_CODE} -eq 200
+      # Get the connected cluster count via /rest/clusters/dev/members endpoint
+      CONNECTED_CLUSTER_SIZE=$(curl --silent hz-hazelcast-mancenter:8080/rest/clusters/dev/members | jq '. | length')
+      # Test the correct number of Hazelcast members
+      test ${CONNECTED_CLUSTER_SIZE} -eq 3
+    resources:
+      null
+  restartPolicy: Never
